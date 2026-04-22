@@ -41,7 +41,7 @@
     <div class="container">
       <div class="tag light">Get in Touch</div>
       <h1>Contact Us</h1>
-      <p>Call us, send a message, or use the form below. We'll get back to you within the hour.</p>
+      <p>Call us or use the form below and we'll get back to you as soon as we can.</p>
     </div>
   </section>
 
@@ -89,10 +89,9 @@
 
           <div class="emergency-box">
             <strong>🚨 Got an emergency?</strong>
-            <p>Don't fill in the form — call or WhatsApp us directly. We answer 24 hours a day.</p>
+            <p>Don't fill in the form — call us directly. We answer 24 hours a day.</p>
             <div style="display:flex; gap:12px; margin-top:14px; flex-wrap:wrap;">
-              <a href="tel:01610000000" class="btn btn-dark" style="font-size:.85rem; padding:10px 20px;">📞 Call Now</a>
-              <a href="https://wa.me/447700000000" class="btn btn-whatsapp" style="font-size:.85rem; padding:10px 20px;" target="_blank" rel="noopener">💬 WhatsApp</a>
+              <a href="tel:01610000000" class="btn btn-dark" style="font-size:.85rem; padding:10px 20px;">📞 Call Now — 0161 000 0000</a>
             </div>
           </div>
         </div>
@@ -145,7 +144,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary" style="width:100%; font-size:1rem; border-radius:var(--radius-sm)">Send Message →</button>
-            <p style="text-align:center; color:var(--muted); font-size:.82rem; margin-top:14px">We'll reply within the hour during working hours.</p>
           </form>
         </div>
 
@@ -171,6 +169,19 @@
           </ul>
         </div>
         <div>
+          <h4>Areas We Cover</h4>
+          <ul class="footer-links">
+            <li><a href="area-manchester.html">Manchester City Centre</a></li>
+            <li><a href="area-salford.html">Salford</a></li>
+            <li><a href="area-trafford.html">Trafford</a></li>
+            <li><a href="area-stockport.html">Stockport</a></li>
+            <li><a href="area-didsbury.html">Didsbury</a></li>
+            <li><a href="area-chorlton.html">Chorlton</a></li>
+            <li><a href="area-bury.html">Bury</a></li>
+            <li><a href="area-bolton.html">Bolton</a></li>
+          </ul>
+        </div>
+        <div>
           <h4>Contact</h4>
           <ul class="footer-links">
             <li><a href="tel:01610000000">0161 000 0000</a></li>
@@ -185,6 +196,33 @@
       </div>
     </div>
   </footer>
+
+  <!-- Palette switcher -->
+  <div class="palette-switcher">
+    <span class="palette-switcher-label">Colour theme</span>
+    <button class="palette-btn" data-theme="" style="background:#f97316" title="Bold — Navy &amp; Orange"></button>
+    <button class="palette-btn" data-theme="dark" style="background:#06b6d4" title="Dark — Charcoal &amp; Cyan"></button>
+    <button class="palette-btn" data-theme="plum" style="background:#2d1b69" title="Plum &amp; Gold"></button>
+    <button class="palette-btn" data-theme="red" style="background:#dc2626" title="Slate &amp; Red"></button>
+    <button class="palette-btn" data-theme="teal" style="background:#0f4c3a" title="Dark Teal &amp; Amber"></button>
+  </div>
+  <script>
+    (function(){
+      var btns = document.querySelectorAll('.palette-btn');
+      var saved = localStorage.getItem('cp-theme') || '';
+      document.documentElement.setAttribute('data-theme', saved);
+      btns.forEach(function(b){
+        if(b.dataset.theme === saved) b.classList.add('active');
+        b.addEventListener('click', function(){
+          var t = b.dataset.theme;
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('cp-theme', t);
+          btns.forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+        });
+      });
+    })();
+  </script>
 
   <!-- Floating WhatsApp button -->
   <a href="https://wa.me/447700000000" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">

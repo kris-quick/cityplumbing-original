@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colour Palette Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #f1f5f9;
+      padding: 40px 24px;
+      color: #1e293b;
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+    .page-intro {
+      font-size: .95rem;
+      color: #64748b;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    /* ── Section headers ── */
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: .7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    /* ── Grid of palette cards ── */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    /* ── Individual palette card ── */
+    .palette-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.1);
+      border: 2px solid transparent;
+      transition: border-color .2s, transform .2s;
+      cursor: pointer;
+    }
+    .palette-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.15);
+    }
+    .palette-card.keeping { border-color: #94a3b8; }
+
+    /* ── Mini nav ── */
+    .mini-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+    }
+    .mini-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: .95rem;
+      color: #fff;
+    }
+    .mini-links {
+      display: flex;
+      gap: 14px;
+    }
+    .mini-link {
+      width: 28px;
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255,255,255,.35);
+    }
+    .mini-cta {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .72rem;
+      color: #fff;
+    }
+
+    /* ── Mini hero ── */
+    .mini-hero {
+      padding: 24px 16px 32px;
+    }
+    .mini-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: .65rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.85);
+      margin-bottom: 10px;
+    }
+    .mini-h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .mini-h1 span { /* accent colour set inline */ }
+    .mini-p {
+      font-size: .75rem;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .mini-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .mini-btn {
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .72rem;
+      border: none;
+      cursor: pointer;
+    }
+    .mini-btn-outline {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,.5);
+      color: #fff;
+    }
+
+    /* ── Mini cards row ── */
+    .mini-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 16px;
+      background: #f8fafc;
+    }
+    .mini-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 12px 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+    }
+    .mini-card-icon {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .9rem;
+      margin-bottom: 6px;
+    }
+    .mini-card-line1 { height: 6px; border-radius: 3px; margin-bottom: 4px; }
+    .mini-card-line2 { height: 4px; border-radius: 2px; background: #e2e8f0; width: 70%; }
+
+    /* ── CTA strip ── */
+    .mini-cta-strip {
+      padding: 16px;
+      text-align: center;
+    }
+    .mini-cta-strip p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: .85rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .mini-cta-strip-btn {
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .72rem;
+      border: none;
+      background: rgba(255,255,255,.15);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,.4);
+    }
+
+    /* ── Palette info strip ── */
+    .palette-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-top: 1px solid #f1f5f9;
+      background: #fff;
+    }
+    .palette-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: .9rem;
+      color: #0f172a;
+    }
+    .palette-desc {
+      font-size: .75rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .palette-swatches {
+      display: flex;
+      gap: 6px;
+    }
+    .swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,.08);
+    }
+    .keeping-tag {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .62rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .new-tag {
+      display: inline-block;
+      background: #fef3c7;
+      color: #d97706;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: .62rem;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .note {
+      font-size: .8rem;
+      color: #94a3b8;
+      margin-top: 4px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Colour Palette Options</h1>
+  <p class="page-intro">The first two are staying. Pick one from A–D to replace the green. Each preview shows the nav, hero, service cards, and CTA strip as they'd actually appear.</p>
+
+  <!-- Existing palettes -->
+  <div class="section-label">Currently in use — keeping these two</div>
+  <div class="palette-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-bottom: 48px;">
+
+    <!-- Palette 1: Bold (Navy + Orange) -->
+    <div class="palette-card keeping">
+      <div class="mini-nav" style="background:#0c1f3f;">
+        <span class="mini-logo">City <span style="color:#f97316">Plumbing</span></span>
+        <div class="mini-links"><div class="mini-link"></div><div class="mini-link"></div><div class="mini-link"></div></div>
+        <span class="mini-cta" style="background:#f97316;">📞 Call Us</span>
+      </div>
+      <div class="mini-hero" style="background:linear-gradient(135deg,rgba(12,31,63,.97),rgba(26,53,97,.9));">
+        <div class="mini-badge">Gas Safe Registered</div>
+        <div class="mini-h1">Manchester's Most<br>Trusted <span style="color:#f97316">Plumbers</span></div>
+        <div class="mini-p">Fast, reliable plumbing across Greater Manchester. Available 24/7.</div>
+        <div class="mini-btns">
+          <button class="mini-btn" style="background:#f97316;color:#fff;">📞 Call Now</button>
+          <button class="mini-btn mini-btn-outline">Get a Quote</button>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(249,115,22,.12);">🚨</div>
+          <div class="mini-card-line1" style="background:#f97316; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(249,115,22,.12);">🔥</div>
+          <div class="mini-card-line1" style="background:#f97316; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(249,115,22,.12);">🛁</div>
+          <div class="mini-card-line1" style="background:#f97316; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+      </div>
+      <div class="mini-cta-strip" style="background:linear-gradient(135deg,#f97316,#ea580c);">
+        <p>Need a Plumber Today?</p>
+        <button class="mini-cta-strip-btn">Call 0161 000 0000</button>
+      </div>
+      <div class="palette-info">
+        <div>
+          <div class="palette-name">Bold <span class="keeping-tag">Keeping</span></div>
+          <div class="palette-desc">Navy #0c1f3f · Orange #f97316</div>
+          <div class="note">Warm, urgent, traditional — high trust</div>
+        </div>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#0c1f3f;"></div>
+          <div class="swatch" style="background:#f97316;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Palette 2: Dark (Charcoal + Cyan) -->
+    <div class="palette-card keeping">
+      <div class="mini-nav" style="background:#0f172a;">
+        <span class="mini-logo">City <span style="color:#06b6d4">Plumbing</span></span>
+        <div class="mini-links"><div class="mini-link"></div><div class="mini-link"></div><div class="mini-link"></div></div>
+        <span class="mini-cta" style="background:#06b6d4;">📞 Call Us</span>
+      </div>
+      <div class="mini-hero" style="background:linear-gradient(135deg,rgba(15,23,42,.97),rgba(30,41,59,.9));">
+        <div class="mini-badge">Gas Safe Registered</div>
+        <div class="mini-h1">Manchester's Most<br>Trusted <span style="color:#06b6d4">Plumbers</span></div>
+        <div class="mini-p">Fast, reliable plumbing across Greater Manchester. Available 24/7.</div>
+        <div class="mini-btns">
+          <button class="mini-btn" style="background:#06b6d4;color:#fff;">📞 Call Now</button>
+          <button class="mini-btn mini-btn-outline">Get a Quote</button>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(6,182,212,.12);">🚨</div>
+          <div class="mini-card-line1" style="background:#06b6d4; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(6,182,212,.12);">🔥</div>
+          <div class="mini-card-line1" style="background:#06b6d4; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(6,182,212,.12);">🛁</div>
+          <div class="mini-card-line1" style="background:#06b6d4; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+      </div>
+      <div class="mini-cta-strip" style="background:linear-gradient(135deg,#06b6d4,#0891b2);">
+        <p>Need a Plumber Today?</p>
+        <button class="mini-cta-strip-btn">Call 0161 000 0000</button>
+      </div>
+      <div class="palette-info">
+        <div>
+          <div class="palette-name">Dark <span class="keeping-tag">Keeping</span></div>
+          <div class="palette-desc">Charcoal #0f172a · Cyan #06b6d4</div>
+          <div class="note">Sleek, modern, tech-forward</div>
+        </div>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#0f172a;"></div>
+          <div class="swatch" style="background:#06b6d4;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- New suggestions -->
+  <div class="section-label">Suggestions to replace the green — pick one</div>
+  <div class="palette-grid">
+
+    <!-- Option A: Plum + Gold -->
+    <div class="palette-card">
+      <div class="mini-nav" style="background:#2d1b69;">
+        <span class="mini-logo">City <span style="color:#f59e0b">Plumbing</span></span>
+        <div class="mini-links"><div class="mini-link"></div><div class="mini-link"></div><div class="mini-link"></div></div>
+        <span class="mini-cta" style="background:#f59e0b; color:#1c1917;">📞 Call Us</span>
+      </div>
+      <div class="mini-hero" style="background:linear-gradient(135deg,rgba(45,27,105,.97),rgba(67,40,155,.88));">
+        <div class="mini-badge">Gas Safe Registered</div>
+        <div class="mini-h1">Manchester's Most<br>Trusted <span style="color:#f59e0b">Plumbers</span></div>
+        <div class="mini-p">Fast, reliable plumbing across Greater Manchester. Available 24/7.</div>
+        <div class="mini-btns">
+          <button class="mini-btn" style="background:#f59e0b;color:#1c1917;">📞 Call Now</button>
+          <button class="mini-btn mini-btn-outline">Get a Quote</button>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(245,158,11,.12);">🚨</div>
+          <div class="mini-card-line1" style="background:#f59e0b; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(245,158,11,.12);">🔥</div>
+          <div class="mini-card-line1" style="background:#f59e0b; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(245,158,11,.12);">🛁</div>
+          <div class="mini-card-line1" style="background:#f59e0b; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+      </div>
+      <div class="mini-cta-strip" style="background:linear-gradient(135deg,#2d1b69,#4c2e9e);">
+        <p>Need a Plumber Today?</p>
+        <button class="mini-cta-strip-btn">Call 0161 000 0000</button>
+      </div>
+      <div class="palette-info">
+        <div>
+          <div class="palette-name">Option A — Plum + Gold <span class="new-tag">New</span></div>
+          <div class="palette-desc">Deep purple #2d1b69 · Gold #f59e0b</div>
+          <div class="note">Rich, premium, stands out from every other plumber</div>
+        </div>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#2d1b69;"></div>
+          <div class="swatch" style="background:#f59e0b;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option B: Warm Charcoal + Coral -->
+    <div class="palette-card">
+      <div class="mini-nav" style="background:#1c1917;">
+        <span class="mini-logo">City <span style="color:#fb7185">Plumbing</span></span>
+        <div class="mini-links"><div class="mini-link"></div><div class="mini-link"></div><div class="mini-link"></div></div>
+        <span class="mini-cta" style="background:#fb7185; color:#fff;">📞 Call Us</span>
+      </div>
+      <div class="mini-hero" style="background:linear-gradient(135deg,rgba(28,25,23,.97),rgba(41,37,36,.9));">
+        <div class="mini-badge">Gas Safe Registered</div>
+        <div class="mini-h1">Manchester's Most<br>Trusted <span style="color:#fb7185">Plumbers</span></div>
+        <div class="mini-p">Fast, reliable plumbing across Greater Manchester. Available 24/7.</div>
+        <div class="mini-btns">
+          <button class="mini-btn" style="background:#fb7185;color:#fff;">📞 Call Now</button>
+          <button class="mini-btn mini-btn-outline">Get a Quote</button>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(251,113,133,.12);">🚨</div>
+          <div class="mini-card-line1" style="background:#fb7185; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(251,113,133,.12);">🔥</div>
+          <div class="mini-card-line1" style="background:#fb7185; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(251,113,133,.12);">🛁</div>
+          <div class="mini-card-line1" style="background:#fb7185; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+      </div>
+      <div class="mini-cta-strip" style="background:linear-gradient(135deg,#fb7185,#f43f5e);">
+        <p>Need a Plumber Today?</p>
+        <button class="mini-cta-strip-btn">Call 0161 000 0000</button>
+      </div>
+      <div class="palette-info">
+        <div>
+          <div class="palette-name">Option B — Charcoal + Coral <span class="new-tag">New</span></div>
+          <div class="palette-desc">Warm black #1c1917 · Coral #fb7185</div>
+          <div class="note">Modern, bold, design-forward — less traditional</div>
+        </div>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#1c1917;"></div>
+          <div class="swatch" style="background:#fb7185;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option C: Slate + Red -->
+    <div class="palette-card">
+      <div class="mini-nav" style="background:#18181b;">
+        <span class="mini-logo">City <span style="color:#dc2626">Plumbing</span></span>
+        <div class="mini-links"><div class="mini-link"></div><div class="mini-link"></div><div class="mini-link"></div></div>
+        <span class="mini-cta" style="background:#dc2626; color:#fff;">📞 Call Us</span>
+      </div>
+      <div class="mini-hero" style="background:linear-gradient(135deg,rgba(24,24,27,.97),rgba(39,39,42,.9));">
+        <div class="mini-badge">Gas Safe Registered</div>
+        <div class="mini-h1">Manchester's Most<br>Trusted <span style="color:#dc2626">Plumbers</span></div>
+        <div class="mini-p">Fast, reliable plumbing across Greater Manchester. Available 24/7.</div>
+        <div class="mini-btns">
+          <button class="mini-btn" style="background:#dc2626;color:#fff;">📞 Call Now</button>
+          <button class="mini-btn mini-btn-outline">Get a Quote</button>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(220,38,38,.1);">🚨</div>
+          <div class="mini-card-line1" style="background:#dc2626; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(220,38,38,.1);">🔥</div>
+          <div class="mini-card-line1" style="background:#dc2626; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(220,38,38,.1);">🛁</div>
+          <div class="mini-card-line1" style="background:#dc2626; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+      </div>
+      <div class="mini-cta-strip" style="background:linear-gradient(135deg,#dc2626,#b91c1c);">
+        <p>Need a Plumber Today?</p>
+        <button class="mini-cta-strip-btn">Call 0161 000 0000</button>
+      </div>
+      <div class="palette-info">
+        <div>
+          <div class="palette-name">Option C — Slate + Red <span class="new-tag">New</span></div>
+          <div class="palette-desc">Near-black #18181b · Red #dc2626</div>
+          <div class="note">Direct, urgent, high contrast — great for emergency focus</div>
+        </div>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#18181b;"></div>
+          <div class="swatch" style="background:#dc2626;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option D: Dark Teal + Amber -->
+    <div class="palette-card">
+      <div class="mini-nav" style="background:#0f4c3a;">
+        <span class="mini-logo">City <span style="color:#f59e0b">Plumbing</span></span>
+        <div class="mini-links"><div class="mini-link"></div><div class="mini-link"></div><div class="mini-link"></div></div>
+        <span class="mini-cta" style="background:#f59e0b; color:#1c1917;">📞 Call Us</span>
+      </div>
+      <div class="mini-hero" style="background:linear-gradient(135deg,rgba(15,76,58,.97),rgba(22,101,52,.88));">
+        <div class="mini-badge">Gas Safe Registered</div>
+        <div class="mini-h1">Manchester's Most<br>Trusted <span style="color:#f59e0b">Plumbers</span></div>
+        <div class="mini-p">Fast, reliable plumbing across Greater Manchester. Available 24/7.</div>
+        <div class="mini-btns">
+          <button class="mini-btn" style="background:#f59e0b;color:#1c1917;">📞 Call Now</button>
+          <button class="mini-btn mini-btn-outline">Get a Quote</button>
+        </div>
+      </div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(245,158,11,.12);">🚨</div>
+          <div class="mini-card-line1" style="background:#f59e0b; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(245,158,11,.12);">🔥</div>
+          <div class="mini-card-line1" style="background:#f59e0b; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-icon" style="background:rgba(245,158,11,.12);">🛁</div>
+          <div class="mini-card-line1" style="background:#f59e0b; opacity:.3;"></div>
+          <div class="mini-card-line2"></div>
+        </div>
+      </div>
+      <div class="mini-cta-strip" style="background:linear-gradient(135deg,#0f4c3a,#166534);">
+        <p>Need a Plumber Today?</p>
+        <button class="mini-cta-strip-btn">Call 0161 000 0000</button>
+      </div>
+      <div class="palette-info">
+        <div>
+          <div class="palette-name">Option D — Dark Teal + Amber <span class="new-tag">New</span></div>
+          <div class="palette-desc">Deep teal #0f4c3a · Amber #f59e0b</div>
+          <div class="note">Earthy, calm, premium trades feel — distinctive</div>
+        </div>
+        <div class="palette-swatches">
+          <div class="swatch" style="background:#0f4c3a;"></div>
+          <div class="swatch" style="background:#f59e0b;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:.82rem; color:#94a3b8; margin-top:8px;">Tell me which you prefer (A, B, C, or D) and I'll swap the green out for it across all pages.</p>
+
+</body>
+</html>

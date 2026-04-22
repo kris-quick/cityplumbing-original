@@ -50,7 +50,7 @@
     <div class="container">
       <div class="split">
         <div class="split-img">
-          <img src="images/team.jpg" alt="City Plumbing team" style="min-height:360px; background:#cdd8e3;">
+          <img src="images/portrait-boiler-engineer.jpg" alt="City Plumbing engineer" style="min-height:360px; background:#cdd8e3;">
           <div class="split-badge">Est. 2009 — Manchester</div>
         </div>
         <div class="split-content">
@@ -135,10 +135,9 @@
   <section class="cta-banner">
     <div class="container">
       <h2>Ready to Book?</h2>
-      <p>Call us now or send a message and we'll get back to you within the hour.</p>
+      <p>Call us or send a message and we'll get back to you as soon as possible.</p>
       <div class="cta-btns">
         <a href="tel:01610000000" class="btn btn-dark">📞 Call 0161 000 0000</a>
-        <a href="https://wa.me/447700000000" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp Us</a>
         <a href="contact.html" class="btn btn-outline">Send a Message</a>
       </div>
     </div>
@@ -162,6 +161,19 @@
           </ul>
         </div>
         <div>
+          <h4>Areas We Cover</h4>
+          <ul class="footer-links">
+            <li><a href="area-manchester.html">Manchester City Centre</a></li>
+            <li><a href="area-salford.html">Salford</a></li>
+            <li><a href="area-trafford.html">Trafford</a></li>
+            <li><a href="area-stockport.html">Stockport</a></li>
+            <li><a href="area-didsbury.html">Didsbury</a></li>
+            <li><a href="area-chorlton.html">Chorlton</a></li>
+            <li><a href="area-bury.html">Bury</a></li>
+            <li><a href="area-bolton.html">Bolton</a></li>
+          </ul>
+        </div>
+        <div>
           <h4>Contact</h4>
           <ul class="footer-links">
             <li><a href="tel:01610000000">0161 000 0000</a></li>
@@ -176,6 +188,33 @@
       </div>
     </div>
   </footer>
+
+  <!-- Palette switcher -->
+  <div class="palette-switcher">
+    <span class="palette-switcher-label">Colour theme</span>
+    <button class="palette-btn" data-theme="" style="background:#f97316" title="Bold — Navy &amp; Orange"></button>
+    <button class="palette-btn" data-theme="dark" style="background:#06b6d4" title="Dark — Charcoal &amp; Cyan"></button>
+    <button class="palette-btn" data-theme="plum" style="background:#2d1b69" title="Plum &amp; Gold"></button>
+    <button class="palette-btn" data-theme="red" style="background:#dc2626" title="Slate &amp; Red"></button>
+    <button class="palette-btn" data-theme="teal" style="background:#0f4c3a" title="Dark Teal &amp; Amber"></button>
+  </div>
+  <script>
+    (function(){
+      var btns = document.querySelectorAll('.palette-btn');
+      var saved = localStorage.getItem('cp-theme') || '';
+      document.documentElement.setAttribute('data-theme', saved);
+      btns.forEach(function(b){
+        if(b.dataset.theme === saved) b.classList.add('active');
+        b.addEventListener('click', function(){
+          var t = b.dataset.theme;
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('cp-theme', t);
+          btns.forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+        });
+      });
+    })();
+  </script>
 
   <!-- Floating WhatsApp button -->
   <a href="https://wa.me/447700000000" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
